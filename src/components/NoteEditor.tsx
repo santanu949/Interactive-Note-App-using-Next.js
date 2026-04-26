@@ -2,8 +2,13 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../lib/store';
-import { updateNote, saveNoteRequest } from '../lib/notesSlice';
+import { updateNote, saveNoteRequest, togglePin, addTag, removeTag } from '../lib/notesSlice';
 import { useState, useEffect } from 'react';
+import { Pin } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+import RichTextEditor from './RichTextEditor';
+import { TagInput } from './TagInput';
 
 export function NoteEditor() {
   const activeNoteId = useSelector((state: RootState) => state.notes.activeNoteId);
@@ -48,19 +53,37 @@ export function NoteEditor() {
 
   return (
     <div className="flex-1 flex flex-col bg-zinc-950 p-8 overflow-hidden">
-      <input 
-        type="text" 
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Note Title"
-        className="text-4xl font-bold bg-transparent border-none outline-none text-white mb-8 placeholder:text-zinc-800"
+      <div className="flex items-center justify-between mb-8">
+        <input 
+          type="text" 
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Note Title"
+          className="text-4xl font-bold bg-transparent border-none outline-none text-white placeholder:text-zinc-800 flex-1"
+        />
+        <motion.button 
+          whileTap={{ scale: 0.9 }}
+          onClick={() => dispatch(togglePin(note.id))}
+          className={`p-2 rounded-lg border transition-colors ${
+            note.isPinned ? 'bg-blue-600/20 border-blue-500 text-blue-400' : 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-zinc-300'
+          }`}
+        >
+          <Pin className={`w-5 h-5 ${note.isPinned ? 'fill-current' : ''}`} />
+        </motion.button>
+      </div>
+
+      <TagInput 
+        tags={note.tags}
+        onAddTag={(tag) => dispatch(addTag({ id: note.id, tag }))}
+        onRemoveTag={(tag) => dispatch(removeTag({ id: note.id, tag }))}
       />
-      <textarea 
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="Start writing..."
-        className="flex-1 bg-transparent border-none outline-none text-zinc-300 resize-none text-lg leading-relaxed placeholder:text-zinc-800"
-      />
+
+      <div className="flex-1 overflow-hidden mt-8">
+        <RichTextEditor 
+          content={content}
+          onChange={(newContent) => setContent(newContent)}
+        />
+      </div>
     </div>
   );
 }

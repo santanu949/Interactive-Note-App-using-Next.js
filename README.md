@@ -6,11 +6,12 @@ An enterprise-grade, interactive note-taking application designed for high perfo
 
 ## 🚀 Key Features
 
-- **Dynamic Note Management**: Create, edit, and delete notes instantly with a fluid UI.
-- **Real-time Autosave**: Powered by **Redux Saga**, the app automatically persists your changes to local storage with a debounced side-effect system.
-- **Modern Aesthetics**: A premium dark-mode interface featuring glassmorphism effects and smooth transitions.
-- **Responsive Design**: Fully optimized for various screen sizes, from mobile to desktop.
-- **Fast Performance**: Leverages Next.js 15 Turbopack for lightning-fast development and optimized production builds.
+- **Hybrid Rich Text Editor**: A powerful Markdown + WYSIWYG editor powered by **TipTap**, featuring task lists, formatting toolbar, and real-time word count.
+- **Global Command Palette (⌘K)**: Quick navigation and action execution with a global search interface.
+- **Advanced Organization**: Support for note pinning, multi-tagging, and fuzzy search across all content.
+- **Premium UX/UI**: Fluid animations using **Framer Motion**, glassmorphism refinements, and a high-performance sidebar.
+- **Real-time Autosave**: Powered by **Redux Saga**, with persistence to local storage.
+- **Intelligent Search**: Full-text fuzzy matching powered by **Fuse.js**.
 
 ---
 

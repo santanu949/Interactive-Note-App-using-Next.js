@@ -2,6 +2,7 @@
 
 import { Sidebar } from '../components/Sidebar';
 import { NoteEditor } from '../components/NoteEditor';
+import { CommandPalette } from '../components/CommandPalette';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setNotes } from '../lib/notesSlice';
@@ -21,6 +22,7 @@ export default function Home() {
     <main className="flex h-screen w-full bg-black">
       <Sidebar />
       <NoteEditor />
+      <CommandPalette />
     </main>
   );
 }

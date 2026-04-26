@@ -4,6 +4,8 @@ export interface Note {
   content: string;
   updatedAt: number;
   tags: string[];
+  isPinned?: boolean;
+  folderId?: string;
 }
 
 export interface NotesState {

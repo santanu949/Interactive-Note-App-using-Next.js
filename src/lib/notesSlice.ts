@@ -13,10 +13,11 @@ const notesSlice = createSlice({
   initialState,
   reducers: {
     setNotes: (state, action: PayloadAction<Note[]>) => {
-      state.notes = action.payload;
+      state.notes = action.payload.sort((a, b) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0));
     },
     addNote: (state, action: PayloadAction<Note>) => {
       state.notes.unshift(action.payload);
+      state.notes.sort((a, b) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0));
       state.activeNoteId = action.payload.id;
     },
     updateNote: (state, action: PayloadAction<Partial<Note> & { id: string }>) => {
@@ -33,6 +34,26 @@ const notesSlice = createSlice({
     },
     setActiveNote: (state, action: PayloadAction<string | null>) => {
       state.activeNoteId = action.payload;
+    },
+    togglePin: (state, action: PayloadAction<string>) => {
+      const note = state.notes.find(n => n.id === action.payload);
+      if (note) {
+        note.isPinned = !note.isPinned;
+        // Sort notes: pinned first
+        state.notes.sort((a, b) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0));
+      }
+    },
+    addTag: (state, action: PayloadAction<{ id: string, tag: string }>) => {
+      const note = state.notes.find(n => n.id === action.payload.id);
+      if (note && !note.tags.includes(action.payload.tag)) {
+        note.tags.push(action.payload.tag);
+      }
+    },
+    removeTag: (state, action: PayloadAction<{ id: string, tag: string }>) => {
+      const note = state.notes.find(n => n.id === action.payload.id);
+      if (note) {
+        note.tags = note.tags.filter(t => t !== action.payload.tag);
+      }
     },
     saveNoteRequest: (state, _action: PayloadAction<Note>) => {
       state.loading = true;
@@ -53,6 +74,9 @@ export const {
   updateNote,
   deleteNote,
   setActiveNote,
+  togglePin,
+  addTag,
+  removeTag,
   saveNoteRequest,
   saveNoteSuccess,
   saveNoteFailure,
