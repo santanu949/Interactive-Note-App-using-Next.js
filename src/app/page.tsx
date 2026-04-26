@@ -19,7 +19,7 @@ export default function Home() {
   }, [dispatch]);
 
   return (
-    <main className="flex h-screen w-full bg-black">
+    <main className="flex h-screen w-full bg-slate-50 overflow-hidden">
       <Sidebar />
       <NoteEditor />
       <CommandPalette />

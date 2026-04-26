@@ -1,40 +1,41 @@
-# 📝 Interactive Note App - Next.js & Redux Saga
+# 📝 Nexus Notes - Professional Productivity Platform
 
-An enterprise-grade, interactive note-taking application designed for high performance and seamless user experience. Built with the latest **Next.js 15**, **Redux Toolkit**, and **Redux Saga**, this app provides a robust platform for managing personal thoughts, snippets, and documentation with real-time autosave capabilities.
+An enterprise-grade, high-performance note-taking platform built with **Next.js 15**, **Tailwind CSS 4**, and **Redux Saga**. Nexus Notes (formerly Studio) is designed for professional workflows, featuring a 3-pane architecture, real-time intelligence, and a premium "Nexus" design system.
 
 ---
 
 ## 🚀 Key Features
 
-- **Hybrid Rich Text Editor**: A powerful Markdown + WYSIWYG editor powered by **TipTap**, featuring task lists, formatting toolbar, and real-time word count.
-- **Global Command Palette (⌘K)**: Quick navigation and action execution with a global search interface.
-- **Advanced Organization**: Support for note pinning, multi-tagging, and fuzzy search across all content.
-- **Premium UX/UI**: Fluid animations using **Framer Motion**, glassmorphism refinements, and a high-performance sidebar.
-- **Real-time Autosave**: Powered by **Redux Saga**, with persistence to local storage.
-- **Intelligent Search**: Full-text fuzzy matching powered by **Fuse.js**.
+- **Nexus Design System**: A high-density, premium light theme with a 3-pane workspace:
+  - **Left Sidebar**: Navigation, profile management, and quick actions.
+  - **Center Canvas**: Focused rich-text editing with wide margins and premium typography.
+  - **Right Properties Panel**: Contextual metadata, status tracking, and linked notes.
+- **Hybrid Rich Text Editor**: Markdown + WYSIWYG editor powered by **TipTap**, featuring task lists, syntax highlighting for code blocks, and real-time word count.
+- **Nexus Command (⌘K)**: A categorized global command palette for quick navigation, search, and action execution.
+- **Intelligent Organization**: Support for note pinning, hierarchical navigation (Folders), multi-tagging, and fuzzy search.
+- **Real-time Persistence**: Debounced autosave powered by **Redux Saga**, ensuring no data loss with local storage persistence.
+- **Fluid UX**: Micro-animations using **Framer Motion** and a responsive layout designed for deep work.
 
 ---
 
 ## 🛠️ Technology Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
-- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/)
-- **Side Effects**: [Redux Saga](https://redux-saga.js.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Typography**: [Inter Font](https://fonts.google.com/specimen/Inter)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router & Turbopack)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) (Using modern `@import` and `@theme` engine)
+- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/) & [Redux Saga](https://redux-saga.js.org/)
+- **Editor Engine**: [TipTap](https://tiptap.dev/)
+- **Search**: [Fuse.js](https://fusejs.io/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
 ---
 
 ## 📦 Getting Started
 
-Follow these simple steps to set up the project on your local machine:
-
 ### 1. Prerequisites
 Ensure you have **Node.js (v18.0.0 or later)** installed.
 
 ### 2. Installation
-Clone the repository and install the dependencies:
 ```bash
 git clone https://github.com/santanu949/Interactive-Note-App-using-Next.js.git
 cd Interactive-Note-App-using-Next.js
@@ -42,44 +43,33 @@ npm install
 ```
 
 ### 3. Execution
-Start the development server:
+Start the development server with Turbopack:
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser to explore the app.
+Access the app at [http://localhost:3000](http://localhost:3000).
 
 ---
 
 ## 🏗️ System Architecture
 
-The project follows a modular architecture that separates concerns between UI, state, and side effects.
+Nexus Notes utilizes a **Decoupled Architecture** to ensure UI performance remains high during intensive editing.
 
 ### 📁 Directory Structure
 ```text
 src/
-├── app/               # Next.js App Router (Layouts, Pages, Styles)
-├── components/        # Reusable UI Components (Sidebar, Editor, etc.)
-├── lib/               # Core logic (Redux Slices, Sagas, Store configuration)
-├── types/             # TypeScript interfaces and types
+├── app/               # Next.js App Router & Global Styles (Tailwind 4)
+├── components/        # Nexus UI Components (Sidebar, NoteEditor, CommandPalette)
+├── lib/               # Business Logic (Redux Slices, Sagas, Store)
+├── types/             # Domain Types & Interfaces
 ```
 
-### 🧩 Core Components
-1. **Sidebar**: Handles note listing, navigation, and new note creation.
-2. **NoteEditor**: A powerful workspace for editing note content with built-in debounced save triggers.
-3. **Providers**: Wraps the application in the necessary Redux context.
-
----
-
-## 🔄 Workflow & Data Flow
-
-Understanding the logic of the application:
-
-1. **User Input**: When a user types in the `NoteEditor`, the local component state is updated immediately.
-2. **Action Dispatch**: After a 500ms debounce, the component dispatches an `updateNote` action to the Redux store.
-3. **State Update**: The Redux slice updates the `notes` state, which instantly reflects in the `Sidebar`.
-4. **Saga Side Effect**: Simultaneously, the `saveNoteRequest` action is intercepted by **Redux Saga**.
-5. **Persistence**: The Saga handles the asynchronous task of saving the note to `localStorage` (or an external API in the future) and dispatches a `saveNoteSuccess` action upon completion.
-6. **Rehydration**: On application load, the `Home` page dispatches a `setNotes` action to load data from `localStorage`.
+### 🧩 Core Workflow
+1. **Input**: User edits content in the `RichTextEditor`.
+2. **Debounce**: Component state waits for a 500ms pause.
+3. **Dispatch**: Action updates the Redux store.
+4. **Saga**: Redux Saga intercepts the update to handle background persistence (Local Storage).
+5. **Rehydration**: App state is automatically restored from the persistence layer on initialization.
 
 ---
 
@@ -90,4 +80,4 @@ Understanding the logic of the application:
 
 ---
 
-*This project was improved and documented with ❤️ by Antigravity.*
+*This platform was architected and built with ❤️ by Antigravity.*

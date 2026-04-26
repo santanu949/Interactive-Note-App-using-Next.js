@@ -28,14 +28,14 @@ const Toolbar = ({ editor }: { editor: any }) => {
   ];
 
   return (
-    <div className="flex flex-wrap gap-1 p-2 bg-zinc-900/50 border border-zinc-800 rounded-lg mb-4">
+    <div className="flex flex-wrap gap-1 p-1 bg-white border border-slate-200 rounded-lg mb-8 w-fit mx-auto shadow-sm sticky top-0 z-10">
       {buttons.map((btn, i) => (
         <button
           key={i}
           onClick={btn.action}
-          className={`p-2 rounded-md transition-colors ${editor.isActive(btn.active) ? 'bg-blue-600/20 text-blue-400' : 'text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300'}`}
+          className={`p-2 rounded-md transition-colors ${editor.isActive(btn.active) ? 'bg-blue-50 text-blue-600' : 'text-slate-400 hover:bg-slate-50 hover:text-slate-600'}`}
         >
-          <btn.icon className="w-4 h-4" />
+          <btn.icon size={16} />
         </button>
       ))}
     </div>
@@ -51,7 +51,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         nested: true,
       }),
       Placeholder.configure({
-        placeholder: 'Start writing your next masterpiece...',
+        placeholder: 'Start writing...',
       }),
       CharacterCount,
     ],
@@ -62,7 +62,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-invert max-w-none focus:outline-none min-h-[500px] text-zinc-300 text-lg leading-relaxed',
+        class: 'prose prose-slate max-w-none focus:outline-none min-h-[500px] text-slate-700 text-lg leading-relaxed selection:bg-blue-100',
       },
     },
   });
@@ -74,7 +74,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
   }, [content, editor]);
 
   if (!editor) {
-    return <div className="animate-pulse bg-zinc-900 h-[500px] rounded-lg" />;
+    return <div className="animate-pulse bg-slate-50 h-[500px] rounded-lg" />;
   }
 
   return (
@@ -83,7 +83,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
       <div className="flex-1 overflow-y-auto scrollbar-hide">
         <EditorContent editor={editor} />
       </div>
-      <div className="pt-4 border-t border-zinc-900 flex justify-between items-center text-[10px] text-zinc-600">
+      <div className="pt-4 border-t border-slate-100 flex justify-between items-center text-[10px] text-slate-400 font-bold uppercase tracking-widest">
         <span>{editor.storage.characterCount.words()} words</span>
         <span>{editor.storage.characterCount.characters()} characters</span>
       </div>

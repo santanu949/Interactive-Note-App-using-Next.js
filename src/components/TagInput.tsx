@@ -21,7 +21,7 @@ export function TagInput({ tags, onAddTag, onRemoveTag }: TagInputProps) {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-2 mt-4">
+    <div className="flex flex-wrap items-center gap-2">
       <AnimatePresence>
         {tags.map((tag) => (
           <motion.span
@@ -29,29 +29,28 @@ export function TagInput({ tags, onAddTag, onRemoveTag }: TagInputProps) {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="flex items-center gap-1 px-2 py-1 bg-zinc-800 text-zinc-400 text-xs rounded-full border border-zinc-700"
+            className="flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-full border border-blue-100 uppercase tracking-wider"
           >
-            <Hash className="w-3 h-3" />
             {tag}
             <button 
               onClick={() => onRemoveTag(tag)}
-              className="hover:text-red-400 transition-colors"
+              className="hover:text-blue-800 transition-colors"
             >
-              <X className="w-3 h-3" />
+              <X className="w-2.5 h-2.5" />
             </button>
           </motion.span>
         ))}
       </AnimatePresence>
-      <div className="flex items-center gap-1 bg-zinc-900/50 rounded-full px-2 py-1 border border-zinc-800 focus-within:border-zinc-600 transition-colors">
+      <div className="flex items-center gap-1 bg-slate-50 rounded-full px-2.5 py-1 border border-slate-100 focus-within:border-blue-200 focus-within:bg-white transition-all">
         <input 
           type="text" 
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
-          placeholder="Add tag..."
-          className="bg-transparent border-none outline-none text-xs text-zinc-400 w-20 placeholder:text-zinc-700"
+          placeholder="Add..."
+          className="bg-transparent border-none outline-none text-[10px] font-bold text-slate-500 w-16 placeholder:text-slate-300 uppercase tracking-widest"
         />
-        <button onClick={handleAdd} className="text-zinc-600 hover:text-zinc-300">
+        <button onClick={handleAdd} className="text-slate-300 hover:text-blue-600">
           <Plus className="w-3 h-3" />
         </button>
       </div>
