@@ -56,6 +56,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
       CharacterCount,
     ],
     content: content,
+    immediatelyRender: false,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
     },
