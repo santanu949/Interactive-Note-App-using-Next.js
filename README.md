@@ -1,4 +1,4 @@
-# 📝 Nexus Notes — Professional Productivity Platform
+# 📝  Productivity Platform
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)
 ![Tailwind](https://img.shields.io/badge/Tailwind-CSS%204-38B2AC?style=flat-square&logo=tailwind-css)
@@ -135,4 +135,3 @@ src/
 
 ---
 
-*Documentation maintained by Antigravity.*
